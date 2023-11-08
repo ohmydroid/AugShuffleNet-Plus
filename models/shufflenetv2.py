@@ -28,14 +28,6 @@ class SplitBlock(nn.Module):
         c = int(x.size(1) * self.ratio)
         return x[:, :c, :, :], x[:, c:, :, :]
 
-class ShiftBlock(nn.Module):
-    def __init__(self, ratio):
-        super(SplitBlock, self).__init__()
-        self.ratio = ratio
-
-    def forward(self, x):
-        c = int(x.size(1) * self.ratio)
-        return torch.cat(x[:, c:, :, :], x[:, :c, :, :])
 
 
 class BasicBlock(nn.Module):
