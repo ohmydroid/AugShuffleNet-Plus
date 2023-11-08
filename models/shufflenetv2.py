@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-'''
+
 class ShuffleBlock(nn.Module):
     def __init__(self, groups=2):
         super(ShuffleBlock, self).__init__()
@@ -16,17 +16,8 @@ class ShuffleBlock(nn.Module):
         N, C, H, W = x.size()
         g = self.groups
         return x.view(N, g, C//g, H, W).permute(0, 2, 1, 3, 4).reshape(N, C, H, W)
-'''
 
 
-class ShuffleBlock(nn.Module):
-    def __init__(self):
-        super(ShuffleBlock, self).__init__()
-
-    def forward(self, x):
-        '''Channel shuffle: [N,C,H,W] -> [N,g,C/g,H,W] -> [N,C/g,g,H,w] -> [N,C,H,W]'''
-        index = torch.randperm(x.size(1))
-        return x[:,index,:,:]
 
 class SplitBlock(nn.Module):
     def __init__(self, ratio):
