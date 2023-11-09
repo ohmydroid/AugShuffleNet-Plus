@@ -86,7 +86,6 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=2*args.batch_size, 
 
 
 # select model
-
 if args.model == 'shufflenetv2' :
    net = ShuffleNetV2(args.scaler, num_classes,args.split_ratio)
    print('ShufflenetV2 is loaded')
@@ -176,8 +175,6 @@ def test(epoch):
 
 summary(net, torch.zeros((1, 3, 32, 32)))
 net = net.to(device)
-
-# Train original ResNets
 
 
 optimizer = optim.SGD(net.parameters(), lr=args.lr,momentum=0.9,nesterov=True, weight_decay=args.weight_decay)
