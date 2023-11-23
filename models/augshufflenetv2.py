@@ -2,19 +2,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-
-class ShuffleBlock(nn.Module):
-    def __init__(self, groups=2):
-        super(ShuffleBlock, self).__init__()
-        self.groups = groups
-
-    def forward(self, x):
-        '''Channel shuffle: [N,C,H,W] -> [N,g,C/g,H,W] -> [N,C/g,g,H,w] -> [N,C,H,W]'''
-        N, C, H, W = x.size()
-        g = self.groups
-        return x.view(N, g, C//g, H, W).permute(0, 2, 1, 3, 4).reshape(N, C, H, W)
-
-
 class SplitBlock(nn.Module):
     def __init__(self, split_ratio=(3/8)):
         super(SplitBlock, self).__init__()
@@ -54,25 +41,17 @@ class BasicBlock(nn.Module):
 
 
     def forward(self, x):
-
         x1, x2, x3 = self.split(x)
 
-        out = self.bn1(self.conv1(x3)) 
-        #out = F.relu(out, inplace=True)
+        out = F.relu(self.bn1(self.conv1(x3)), inplace=True)
         out = self.bn2(self.conv2(out)) 
         
-        #c1, c2 = torch.chunk(out, 2,1)
-
-        c1, c2 = out[:, :out.size(1)//2, :, :], out[:, out.size(1)//2:, :, :] 
-
+        c1, c2 = torch.chunk(out, 2,1)
         out = torch.cat([c2, x2], 1)
-
-        out = self.bn3(self.conv3(out)) 
-        out = F.relu(out, inplace=True)
-
+        
+        out = F.relu(self.bn3(self.conv3(out)), inplace=True)
         out = torch.cat([c1, x1,  out], dim=1)
         
-        #out = self.shuffle(out)
         return out
 
 class DownBlock(nn.Module):
