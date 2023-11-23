@@ -47,15 +47,15 @@ class BasicBlock(nn.Module):
         self.shuffle = ShuffleBlock()
 
     def forward(self, x):
-        x1, x2 = self.split(x)
-        out = self.bn1(self.conv1(x2))
-        out = F.relu(out, inplace=True)
-
+        out = self.shuffle(x)
+        x1, x2 = self.split(out)
+       
+        out = F.relu( self.bn1(self.conv1(x2)), inplace=True)
         out = self.bn2(self.conv2(out)) 
-
         out = F.relu(self.bn3(self.conv3(out)), inplace=True)
+        
         out = torch.cat([x1, out], 1)
-        out = self.shuffle(out)
+       
         return out
 
 
@@ -155,12 +155,3 @@ configs = {
     }
 }
 
-'''
-def test():
-    net = ShuffleNetV2(net_size=0.5,10)
-    x = torch.randn(3, 3, 32, 32)
-    y = net(x)
-    print(y.shape)
-'''
-
-# test()
