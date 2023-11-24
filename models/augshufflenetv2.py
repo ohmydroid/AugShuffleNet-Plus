@@ -16,14 +16,13 @@ class SplitBlock(nn.Module):
         return out
 
 class BasicBlock(nn.Module):
-    def __init__(self, in_channels, split_ratio=0.375):
+    def __init__(self, in_channels, split_ratio=0.375, fuse_ratio=0.5):
 
         super(BasicBlock, self).__init__()
         
-        assert split_ratio <= 0.5
         self.split = SplitBlock(split_ratio)
         cin = int(split_ratio*in_channels)
-        cout = int(0.5*in_channels)
+        cout = int(fuse_ratio*in_channels)
 
         self.conv1 = nn.Conv2d(cin, cin, kernel_size=1, stride=1, bias=False)
         self.bn1 = nn.BatchNorm2d(cin)
