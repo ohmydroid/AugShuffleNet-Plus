@@ -14,7 +14,7 @@ python main.py --model augshufflenet
 
 # Results
 ## 10 runs on cifar10
-|Model |               MAdds | Params  | Acc           |                                              training time per epoch| 
+|Model |               MAdds | Params  | Acc(%)          |                                              training time/epoch| 
 |----------------------|------|---------|-----|-----|
 |AugShuffleNet 1.5x    |85.38M |2.22M     |94.00  93.95 94.16 93.98 93.86 94.07 93.94 93.83 93.45 94.12  |21.4s|
 |ShuffleNetV2  1.5x    |94.27M |2.49M     |93.92  93.47 93.28 93.59 93.67 93.71 93.78 93.55 93.44 93.72  |26.2s|
@@ -29,7 +29,7 @@ python main.py --model augshufflenet
 
 
 ## 10 runs on cifar100
-|Model |               MAdds | Params  | Acc           |                                              training time per epoch| 
+|Model |               MAdds | Params  | Acc           |                                              training time/epoch| 
 |----------------------|------|---------|-----|-----|
 |AugShuffleNet 1.5x|  85.5M  |2.32M   |74.12   74.55 74.95 74.88 74.78 74.27 74.90 74.61 74.36 74.68 |21.4s|
 |ShuffleNetV2 1.5x|   94.36M |2.58M  |73.47 73.68  73.64 73.76 74.10 73.74 73.58 73.87  73.35 73.35|26.2s|
