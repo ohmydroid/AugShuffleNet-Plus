@@ -16,11 +16,12 @@ class SplitBlock(nn.Module):
         return out
 
 class BasicBlock(nn.Module):
-    def __init__(self, in_channels, split_ratio=0.375, fuse_ratio=0.5):
+    def __init__(self, in_channels, split_ratio=0.375, fuse_ratio=0.5, FIFO_mode=False):
 
         super(BasicBlock, self).__init__()
         
         self.split = SplitBlock(split_ratio)
+        self.FIFO_mode = FiFO_mode
         cin = int(split_ratio*in_channels)
         cout = int(fuse_ratio*in_channels)
 
@@ -49,7 +50,11 @@ class BasicBlock(nn.Module):
         out = torch.cat([c2, x2], 1)
         
         out = F.relu(self.bn3(self.conv3(out)), inplace=True)
-        out = torch.cat([c1, x1,  out], dim=1)
+        
+        if self.FIFO_mode:
+            out = torch.cat([out, c1, x1], dim=1)
+        else:
+            out = torch.cat([c1, x1,  out], dim=1)
         
         return out
 
