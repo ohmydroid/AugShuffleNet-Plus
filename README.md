@@ -1,8 +1,8 @@
 # AugShuffleNet-plus
 
-Faster version of AugShuffleNet, has better performance than shufflenetv2 with less computational cost and  higher training/inference speed.
+This repo presents a faster version of AugShuffleNet. 
 
-There is no channel shuffle, AugShuffleNet-Plus computes partially, crossovers swiftly, allowing us to construct deep networks in an efficient way.
+We remove channel shuffle operation widely used in ShuffleNetV2 and AugShuffleNet, offering obvious improvement over training/inference speed. By enabling FIFO mode of feature rerangement, AugSHuffleNet-Plus allows paralel computing for both training and inference process.
 
 By replacing $K\times K$ depth-wise separable convolution with $K\times K$ regular convolution, it can be also a potential GPU-friendly model, which does not rely on residual connection and channel shuffle.
 
