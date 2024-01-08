@@ -2,9 +2,11 @@
 
 This repo presents a faster version of AugShuffleNet. 
 
-We remove channel shuffle operation widely used in ShuffleNetV2 and AugShuffleNet, offering obvious improvement over training/inference speed. By enabling FIFO mode of feature rerangement, AugSHuffleNet-Plus allows paralel computing for both training and inference process.
+Model Acceleration comes from two aspects:
 
-By replacing $K\times K$ depth-wise separable convolution with $K\times K$ regular convolution, it can be also a potential GPU-friendly model, which does not rely on residual connection and channel shuffle.
+1. We remove channel shuffle operation widely used in ShuffleNetV2 and AugShuffleNet, offering obvious improvement over training/inference speed. By enabling FIFO mode of feature rerangement, AugSHuffleNet-Plus allows parallel computing for both training and inference process.
+
+2. By replacing $K\times K$ depth-wise separable convolution with $K\times K$ regular convolution, it can be also a potential GPU-friendly model, which does not rely on residual connection and channel shuffle.
 
 
 ```python
@@ -26,8 +28,6 @@ python main.py --model augshufflenet
 
 
 
-
-
 ## 10 runs on cifar100
 |Model |               MAdds | Params  | Acc           |                                              training time/epoch| 
 |----------------------|------|---------|-----|-----|
@@ -39,4 +39,4 @@ python main.py --model augshufflenet
 |ShuffleNetV2 0.5x   |11.00M |0.44M  |67.39 66.70  67.47 66.12 66.55 67.44 66.74 66.82  66.52 66.76 |8.8s|
 
 
-
+Above results presents the training speed of AugSHuffleNet-plus without channel shuffle. Parallel computing supported by FIFO mode will reduce more latency in the future.
