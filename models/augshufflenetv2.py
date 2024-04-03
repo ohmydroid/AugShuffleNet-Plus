@@ -21,7 +21,6 @@ class BasicBlock(nn.Module):
         super(BasicBlock, self).__init__()
         
         self.split = SplitBlock(split_ratio)
-        self.FIFO_mode = FiFO_mode
         cin = int(split_ratio*in_channels)
         cout = int(fuse_ratio*in_channels)
 
