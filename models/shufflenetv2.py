@@ -81,7 +81,6 @@ class DownBlock(nn.Module):
                                kernel_size=1, bias=False)
         self.bn5 = nn.BatchNorm2d(mid_channels)
 
-        self.shuffle = ShuffleBlock()
 
     def forward(self, x):
         # left
@@ -93,7 +92,7 @@ class DownBlock(nn.Module):
         out2 = F.relu(self.bn5(self.conv5(out2)), inplace=True)
         # concat
         out = torch.cat([out1, out2], 1)
-        out = self.shuffle(out)
+        
         return out
 
 
