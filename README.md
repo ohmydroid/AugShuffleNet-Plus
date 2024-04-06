@@ -8,6 +8,8 @@ python main.py --model augshufflenet
 
 
 # Results
+ All models are trained 200 epochs on cifar10 and cifar100.
+ 
 ## 10 runs on cifar10
 |Model |               MAdds | Params  | Acc(%)          |                                              training time/epoch| 
 |----------------------|------|---------|-----|-----|
