@@ -111,13 +111,13 @@ class AugShuffleNetV2(nn.Module):
         return nn.Sequential(*layers)
 
     def forward(self, x):
-        out = F.relu(self.bn1(self.conv1(x)))
+        out = F.relu(self.bn1(self.conv1(x)), inplace=True)
         #out = F.max_pool2d(out, 3, stride=1, padding=1)
 
         out = self.layer1(out)
         out = self.layer2(out)
         out = self.layer3(out)
-        out = F.relu(self.bn5(self.conv5(out)))
+        out = F.relu(self.bn5(self.conv5(out)), inplace=True)
         out = F.avg_pool2d(out, out.size(3))
         out = out.view(out.size(0), -1)
         #out = nn.Dropout(0.1)(out)
