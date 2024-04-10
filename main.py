@@ -19,7 +19,7 @@ from torchsummaryX import summary
 parser = argparse.ArgumentParser(description='PyTorch CIFAR Training')
 
 ## Settings for model
-parser.add_argument('-m', '--model', default='augshufflenetv2', help='Model Type.')
+parser.add_argument('-m', '--model', default='augshufflenet', help='Model Type.')
 parser.add_argument('-s', '--scaler', default=1.5, type=float, help='width scaler of models')
 parser.add_argument('-sr','--split_ratio', default=0.375, type=float, help='split ratio')
 
@@ -99,7 +99,7 @@ if device == 'cuda' and args.multi_gpu==1:
    net = nn.DataParallel(net)
 
 
-model_path = './checkpoint/seed_{}_split_{}_{}_{}_{}x_weight_decay_{}_lr_{}_{}_epoch_ckpt.pth'.format(args.seed, args.split_ratio,args.dataset,args.model,args.scaler,args.weight_decay,args.lr,args.epoch)
+model_path = f'./checkpoint/seed_{args.seed}_split_{args.split_ratio}_{args.dataset}_{args.model}_{args.scaler}x_weight_decay_{args.weight_decay}_lr_{args.lr}_{args.epoch}_epoch_ckpt.pth'
 if args.resume:
     # Load checkpoint.
     print('==> Resuming from checkpoint..')
