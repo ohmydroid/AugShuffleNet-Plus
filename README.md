@@ -8,7 +8,7 @@ python main.py --model augshufflenet
 
 
 # Results
- All models are trained 200 epochs on cifar10 and cifar100.
+ All models are trained 200 epochs on cifar10 and cifar100. device: 3060 GPU. 
  
 ## 10 runs on cifar10
 |Model |               MAdds | Params  | Acc(%)          |                                              training time/epoch| 
@@ -33,4 +33,12 @@ python main.py --model augshufflenet
 |AugShuffleNet 0.5x  |10.29M |0.42M   | 68.95   68.67 68.90 68.28 68.48 68.20 68.22 69.45 68.04 68.06 |7.3s|
 |ShuffleNetV2 0.5x   |11.00M |0.44M  |67.39 66.70  67.47 66.12 66.55 67.44 66.74 66.82  66.52 66.76 |8.8s|
 
-
+# Citation
+```
+@article{ye2022augshufflenet,
+  title={AugShuffleNet: Communicate more, compute less},
+  author={Ye, Longqing},
+  journal={arXiv preprint arXiv:2203.06589},
+  year={2022}
+}
+```
