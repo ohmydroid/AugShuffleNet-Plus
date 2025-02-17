@@ -86,7 +86,7 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=2*args.batch_size, 
 
 # select model
 if args.model == 'shufflenetv2' :
-   net = ShuffleNetV2(args.scaler, num_classes,args.split_ratio)
+   net = ShuffleNetV2(args.scaler, num_classes)
    print('ShufflenetV2 is loaded')
 
 
